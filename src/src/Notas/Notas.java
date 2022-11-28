@@ -1,46 +1,32 @@
 package Notas;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.util.Arrays;
 import java.util.Locale;
 
 public class Notas {
     double[] listaNotas;
     private double nota1, nota2, nota3, nota4, nota5, prom, desviacionEstandar;
     boolean infoComplete = false;
-    ImageIcon img = new ImageIcon("Notas/education.png");
     private JPanel frmNotas;
     private JTextField txtNota1, txtNota2, txtNota3, txtNota4, txtNota5;
-    private JButton btnCalcular;
-    private JTextField txtPromedio;
-    private JLabel lblProm;
-    private JButton btnLimpiar;
-    private JLabel lblDesviacion;
-    private JLabel lblNotaMayor;
-    private JLabel lblNotaMenor;
+    private JButton btnCalcular, btnLimpiar;
+    private JLabel lblProm, lblNotaMayor, lblNotaMenor, lblDesviacion;
 
     public Notas() {
         listaNotas = new double[5];
-        btnCalcular.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        btnCalcular.addActionListener(e -> {
+            checkFieldsNotEmpty();
+            if (infoComplete) {
+                calcularPromedio(listaNotas);
+                calcularMayor(listaNotas);
+                calcularMenor(listaNotas);
+                calcularDesviacion(listaNotas, prom);
+            } else {
                 checkFieldsNotEmpty();
-                if (infoComplete) {
-                    calcularPromedio(listaNotas);
-                    calcularMayor(listaNotas);
-                    calcularMenor(listaNotas);
-                    calcularDesviacion(listaNotas, prom);
-                } else {
-                    checkFieldsNotEmpty();
-                }
             }
         });
-        btnLimpiar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clearInfo();
-            }
-        });
+        btnLimpiar.addActionListener(e -> clearInfo());
     }
 
     public void loadForm() {
@@ -50,7 +36,6 @@ public class Notas {
         f.setLocationRelativeTo(null);
         f.setVisible(true);
         f.setResizable(false);
-        f.setIconImage(img.getImage());
     }
 
     private void settingInfo() {
@@ -77,11 +62,7 @@ public class Notas {
         lblDesviacion.setText("");
         lblNotaMayor.setText("");
         lblNotaMenor.setText("");
-        listaNotas[0] = 0;
-        listaNotas[1] = 0;
-        listaNotas[2] = 0;
-        listaNotas[3] = 0;
-        listaNotas[4] = 0;
+        Arrays.fill(listaNotas, 0);
     }
 
     private void checkFieldsNotEmpty(){
@@ -136,7 +117,6 @@ public class Notas {
 
     private void calcularDesviacion(double[] listaNotas, double prom){
         this.desviacionEstandar = 0;
-        System.out.println(prom);
         for(int i=0; i<5; i++){
             this.desviacionEstandar += Math.pow((listaNotas[i] - prom), 2);
         }

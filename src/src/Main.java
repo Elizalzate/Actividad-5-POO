@@ -1,9 +1,10 @@
+import Figuras.DashboardFiguras;
 import Notas.Notas;
+import UniversidadNacional.VentanaPrincipal;
 
 public class Main {
     public static void main(String[] args) {
-
-        Notas n = new Notas();
-        n.loadForm();
+        Dashboard inicio = new Dashboard();
+        inicio.loadForm();
     }
 }

@@ -111,7 +111,7 @@ public class Notas {
             this.prom += listaNotas[i];
         }
         this.prom /= 5;
-        lblProm.setText(String.valueOf(String.format(Locale.ROOT,"%.2f",prom)));
+        lblProm.setText(String.format(Locale.ROOT, "%.2f", prom));
     }
 
     private void calcularMayor(double[] listaNotas){
@@ -141,6 +141,6 @@ public class Notas {
             this.desviacionEstandar += Math.pow((listaNotas[i] - prom), 2);
         }
         this.desviacionEstandar = Math.sqrt(desviacionEstandar/5);
-        lblDesviacion.setText(String.valueOf(String.format(Locale.ROOT,"%.2f",desviacionEstandar)));
+        lblDesviacion.setText(String.format(Locale.ROOT, "%.2f", desviacionEstandar));
     }
 }
